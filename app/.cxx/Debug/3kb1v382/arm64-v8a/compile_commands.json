@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/Users/john/AndroidStudioProjects/sfml3-android/app/.cxx/Debug/3kb1v382/arm64-v8a",
+  "command": "/Users/john/Library/Android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android23 --sysroot=/Users/john/Library/Android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dsfml_example_EXPORTS -I/Users/john/Library/Android/sdk/ndk/27.2.12479018/sources/cxx-stl -I/Users/john/Library/Android/sdk/ndk/27.2.12479018/sources/android -isystem /Users/john/Library/Android/sdk/ndk/27.2.12479018/sources/third_party/sfml/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -std=gnu++17 -o CMakeFiles/sfml-example.dir/main.cpp.o -c /Users/john/AndroidStudioProjects/sfml3-android/app/src/main/cpp/main.cpp",
+  "file": "/Users/john/AndroidStudioProjects/sfml3-android/app/src/main/cpp/main.cpp"
+}
+]

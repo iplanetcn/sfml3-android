@@ -1,0 +1,5 @@
+# ninja log v5
+5843	6192	1735111299023825649	/Users/john/AndroidStudioProjects/sfml3-android/app/build/intermediates/cxx/Debug/3kb1v382/obj/arm64-v8a/libsfml-example.so	98643ea91f054a50
+0	5834	1735111298646691896	CMakeFiles/sfml-example.dir/main.cpp.o	16ab398fdf7c832d
+0	15	0	clean	c6f15c680cf2a5e7
+0	116	1735111324105663522	build.ninja	a502ba7c7a5cb0e1
