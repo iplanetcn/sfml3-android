@@ -8,7 +8,7 @@ targetSdk = "35"
 ndk = "27.2.12479018"
 
 # libs
-agp = '8.7.3'
+agp = "8.8.1"
 arouter = '1.5.2'
 arouterkspcompiler = '1.9.22-1.0.7'
 rules = '1.6.1'
