@@ -1,15 +1,9 @@
 #include <SFML/Graphics.hpp>
-
 #include <SFML/Audio.hpp>
-
 #include <SFML/Network.hpp>
-
 #include <SFML/Window.hpp>
-
 #include <SFML/System.hpp>
-
 #include <cstdint>
-
 
 // Do we want to showcase direct JNI/NDK interaction?
 // Undefine this to get real cross-platform code.
@@ -82,8 +76,8 @@ int vibrate(sf::Time duration)
 // This is the actual Android example. You don't have to write any platform
 // specific code, unless you want to use things not directly exposed.
 // ('vibrate()' in this example; undefine 'USE_JNI' above to disable it)
-int main(int argc, char* argv[])
-{
+int main(int argc, char *argv[]) {
+
     sf::VideoMode screen(sf::VideoMode::getDesktopMode());
 
     sf::RenderWindow window(screen, "");
@@ -110,46 +104,30 @@ int main(int argc, char* argv[])
     // work, but keep battery life in mind.
     bool active = true;
 
-    while (window.isOpen())
-    {
-        while (const std::optional event = active ? window.pollEvent() : window.waitEvent())
-        {
+    while (window.isOpen()) {
+        while (const std::optional event = active ? window.pollEvent() : window.waitEvent()) {
             if (event->is<sf::Event::Closed>() ||
                 (event->is<sf::Event::KeyPressed>() &&
-                 event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Escape))
-            {
+                 event->getIf<sf::Event::KeyPressed>()->code == sf::Keyboard::Key::Escape)) {
                 window.close();
-            }
-
-            else if (const auto* resized = event->getIf<sf::Event::Resized>())
-            {
+            } else if (const auto *resized = event->getIf<sf::Event::Resized>()) {
                 const auto size = sf::Vector2f(resized->size);
                 view.setSize(size);
                 view.setCenter(size / 2.f);
                 window.setView(view);
-            }
-            else if (event->is<sf::Event::FocusLost>())
-            {
+            } else if (event->is<sf::Event::FocusLost>()) {
                 background = sf::Color::Black;
-            }
-            else if (event->is<sf::Event::FocusGained>())
-            {
+            } else if (event->is<sf::Event::FocusGained>()) {
                 background = sf::Color::White;
             }
-            // On Android MouseLeft/MouseEntered are (for now) triggered,
-            // whenever the app loses or gains focus.
-            else if (event->is<sf::Event::MouseLeft>())
-            {
+                // On Android MouseLeft/MouseEntered are (for now) triggered,
+                // whenever the app loses or gains focus.
+            else if (event->is<sf::Event::MouseLeft>()) {
                 active = false;
-            }
-            else if (event->is<sf::Event::MouseEntered>())
-            {
+            } else if (event->is<sf::Event::MouseEntered>()) {
                 active = true;
-            }
-            else if (const auto* touchBegan = event->getIf<sf::Event::TouchBegan>())
-            {
-                if (touchBegan->finger == 0)
-                {
+            } else if (const auto *touchBegan = event->getIf<sf::Event::TouchBegan>()) {
+                if (touchBegan->finger == 0) {
                     image.setPosition(sf::Vector2f(touchBegan->position));
 #if defined(USE_JNI)
                     vibrate(sf::milliseconds(10));
@@ -158,15 +136,12 @@ int main(int argc, char* argv[])
             }
         }
 
-        if (active)
-        {
+        if (active) {
             window.clear(background);
             window.draw(image);
             window.draw(text);
             window.display();
-        }
-        else
-        {
+        } else {
             sf::sleep(sf::milliseconds(100));
         }
     }
