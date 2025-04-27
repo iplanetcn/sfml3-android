@@ -13,7 +13,6 @@
 #if defined(USE_JNI)
 // These headers are only needed for direct NDK/JDK interaction
 #include <android/native_activity.h>
-#include <cpp.h>
 
 // Since we want to get the native activity from SFML, we'll have to use an
 // extra header here:
@@ -132,6 +131,10 @@ int main(int argc, char *argv[]) {
 #if defined(USE_JNI)
                     vibrate(sf::milliseconds(10));
 #endif
+                }
+            } else if (const auto *touchMoved = event->getIf<sf::Event::TouchMoved>()) {
+                if (touchMoved->finger == 0) {
+                    image.setPosition(sf::Vector2f(touchMoved->position));
                 }
             }
         }
