@@ -13,14 +13,14 @@ if(NOT EXISTS "${SFML_DIR}/SFMLConfig.cmake")
 endif()
 
 # Find and link SFML
-find_package(SFML 3 REQUIRED COMPONENTS Graphics Main CONFIG)
+find_package(SFML 3 REQUIRED COMPONENTS Graphics Audio Main CONFIG)
 
 file(GLOB_RECURSE SRC_FILES "src/*.cpp" "src/*.h")
 
 # Create the libsfml-example.so library that contains the application's c++ code
 add_library(${PROJECT_NAME} SHARED ${SRC_FILES})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE SFML::Graphics android log)
+target_link_libraries(${PROJECT_NAME} PRIVATE SFML::Graphics SFML::Audio android log)
 
 # The ANativeActivity_onCreate function from SFML::Main needs to be exposed in
 # our libsfml-example.so file so that is can be loaded at runtime.

@@ -94,6 +94,13 @@ int main(int argc, char *argv[]) {
     text.setFillColor(sf::Color::Black);
     text.setPosition({10, 10});
 
+    const sf::SoundBuffer tapBuffer("button.wav");
+    sf::Sound tapSound(tapBuffer);
+
+    sf::Music music("pixel_city_cruising.ogg");
+    music.setLooping(true);
+    music.play();
+
     sf::View view = window.getDefaultView();
 
     sf::Color background = sf::Color::White;
@@ -123,11 +130,14 @@ int main(int argc, char *argv[]) {
                 // whenever the app loses or gains focus.
             else if (event->is<sf::Event::MouseLeft>()) {
                 active = false;
+                music.pause();
             } else if (event->is<sf::Event::MouseEntered>()) {
                 active = true;
+                music.play();
             } else if (const auto *touchBegan = event->getIf<sf::Event::TouchBegan>()) {
                 if (touchBegan->finger == 0) {
                     image.setPosition(sf::Vector2f(touchBegan->position));
+                    tapSound.play();
 #if defined(USE_JNI)
                     vibrate(sf::milliseconds(10));
 #endif
