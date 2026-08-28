@@ -3,31 +3,22 @@ project(sfml-example CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_TOOLCHAIN_FILE ${ANDROID_NDK}/build/cmake/android.toolchain.cmake)
 
 set(SFML_DIR "${CMAKE_ANDROID_NDK}/sources/third_party/sfml/lib/${CMAKE_ANDROID_ARCH_ABI}/cmake/SFML")
 
+if(NOT EXISTS "${SFML_DIR}/SFMLConfig.cmake")
+    message(FATAL_ERROR
+        "SFML not found at ${SFML_DIR}.\n"
+        "Build and install SFML 3 for this NDK (see README.md).")
+endif()
+
 # Find and link SFML
-find_package(SFML 3.0.0 REQUIRED COMPONENTS Graphics Main CONFIG)
+find_package(SFML 3 REQUIRED COMPONENTS Graphics Main CONFIG)
 
-include_directories(
-        "${CMAKE_ANDROID_NDK}/sources/third_party/sfml/include"
-        "${ANDROID_NDK}/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include"
-        "${ANDROID_NDK}/sources/cxx-stl"
-        "${ANDROID_NDK}/sources/android"
-)
-
-file(GLOB_RECURSE SRC_FILES "*.cpp" "*.h")
+file(GLOB_RECURSE SRC_FILES "src/*.cpp" "src/*.h")
 
 # Create the libsfml-example.so library that contains the application's c++ code
 add_library(${PROJECT_NAME} SHARED ${SRC_FILES})
-
-target_include_directories(${PROJECT_NAME} PRIVATE
-        "${CMAKE_ANDROID_NDK}/sources/third_party/sfml/include"
-        "${ANDROID_NDK}/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include"
-        "${ANDROID_NDK}/sources/cxx-stl"
-        "${ANDROID_NDK}/sources/android"
-)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SFML::Graphics android log)
 

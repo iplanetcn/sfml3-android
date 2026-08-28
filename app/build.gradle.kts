@@ -1,19 +1,21 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-    alias(libs.plugins.com.android.application)
+    alias(libs.plugins.application)
 }
 
 android {
     namespace = "org.sfmldev.android"
-    ndkVersion = libs.versions.ndk.get()
-    compileSdk = libs.versions.compileSdk.get().toInt()
+    compileSdk {
+        version = release(36)
+    }
+    ndkVersion = "29.0.14206865"
     defaultConfig {
         applicationId = "org.sfmldev.android"
-        minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = libs.versions.versionCode.get().toInt()
-        versionName = libs.versions.versionName.get()
+        minSdk = 24
+        targetSdk = 36
+        versionCode = 1
+        versionName = "1.0"
 
         ndk {
             abiFilters.add("arm64-v8a")
@@ -29,7 +31,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     externalNativeBuild {
